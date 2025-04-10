@@ -1,19 +1,19 @@
 "use client";
 
-import Image from "next/image";
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { fadeInRight, fadeInUp, staggerFadeInUp } from "@/lib/animations";
+import { motion } from "framer-motion";
 import {
+  Bath,
+  Bed,
   ChevronLeft,
   ChevronRight,
-  Bed,
-  Bath,
-  Maximize,
-  MapPin,
   Heart,
+  MapPin,
+  Maximize,
 } from "lucide-react";
-import { motion } from "framer-motion";
-import { fadeInUp, staggerFadeInUp, fadeInRight } from "@/lib/animations";
+import Image from "next/image";
+import { useState } from "react";
 import { AnimationWrapper } from "./AnimationWrapper";
 
 const properties = [
@@ -148,7 +148,7 @@ export function PropertyShowcase() {
         >
           {visibleProperties.map((property, index) => (
             <motion.div
-              key={property.id}
+              key={index}
               variants={fadeInUp}
               whileHover={{
                 y: -8,
