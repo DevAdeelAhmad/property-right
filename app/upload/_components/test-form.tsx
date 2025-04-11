@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -28,6 +29,8 @@ const formSchema = z.object({
   }),
 })
 
+const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
+
 const TestForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -42,7 +45,7 @@ const TestForm = () => {
     setIsSubmitting(true)
     
     try {
-      const response = await fetch('/api/properties', {
+      const response = await fetch(`${apiUrl}/properties`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -51,6 +54,7 @@ const TestForm = () => {
       })
       
       if (response.ok) {
+        const data = await response.json();
         toast.success("Property registered successfully!", {
           description: `Property "${values.propertyName}" has been added to the database.`,
           duration: 5000,
@@ -59,13 +63,13 @@ const TestForm = () => {
       } else {
         const errorData = await response.json()
         toast.error("Failed to register property", {
-          description: errorData.error || "An unknown error occurred",
+          description: errorData.message || "An unknown error occurred",
         })
       }
     } catch (error) {
       console.error('Error submitting form:', error)
       toast.error("Connection error", {
-        description: "Could not connect to the server. Please try again.",
+        description: "Could not connect to the NestJS backend. Please ensure the server is running.",
       })
     } finally {
       setIsSubmitting(false)
