@@ -34,7 +34,7 @@ export function Hero() {
   }, []);
 
   return (
-    <div className="relative h-[85vh] overflow-hidden">
+    <div className="relative min-h-[100svh] md:h-[85vh] overflow-hidden flex items-center justify-center">
       {/* Background images */}
       <div className="absolute inset-0 z-0">
         {heroImages.map((img, index) => (
@@ -66,7 +66,7 @@ export function Hero() {
       </div>
 
       {/* Content */}
-      <div className="relative z-20 container mx-auto h-full flex flex-col items-center justify-center text-white px-4 sm:px-6 lg:px-8">
+      <div className="relative z-20 container mx-auto h-full flex flex-col items-center justify-center text-white px-4 sm:px-6 lg:px-8 py-8 md:py-0">
         <motion.div
           initial="hidden"
           animate="visible"
@@ -74,14 +74,14 @@ export function Hero() {
         >
           <motion.h1
             variants={fadeInUp}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 text-center"
+            className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4 md:mb-6 text-center"
           >
             Find Your Perfect Property in the UAE
           </motion.h1>
           <motion.p
             variants={fadeInUp}
             transition={{ delay: 0.2 }}
-            className="text-lg md:text-xl opacity-90 mb-8 max-w-2xl mx-auto text-center"
+            className="text-base md:text-xl opacity-90 mb-6 md:mb-8 max-w-2xl mx-auto text-center"
           >
             PropertyRight connects you with verified agents and exclusive
             listings for buying, renting, or investing in properties across the
@@ -92,42 +92,44 @@ export function Hero() {
           <motion.div
             variants={fadeInUp}
             transition={{ delay: 0.3 }}
-            className="w-full backdrop-blur-md bg-black/40 rounded-xl p-6 shadow-xl border border-white/30"
+            className="w-full backdrop-blur-md bg-black/40 rounded-xl p-4 md:p-6 shadow-xl border border-white/30"
           >
-            {/* Tabs */}
-            <div className="flex flex-wrap mb-5 border-b border-white/30 pb-3">
-              {["buy", "rent", "projects", "commercial", "agents", "developers"].map((tab) => (
-                <button
-                  key={tab}
-                  onClick={() => setActiveTab(tab)}
-                  className={`capitalize text-sm font-medium whitespace-nowrap px-5 py-2.5 rounded-lg mr-2 mb-2 transition-all ${
-                    activeTab === tab
-                      ? "bg-primary text-white shadow-lg"
-                      : "text-white hover:bg-white/20"
-                  }`}
-                >
-                  {tab}
-                </button>
-              ))}
+            {/* Tabs - Now horizontally scrollable */}
+            <div className="flex overflow-x-auto mb-4 md:mb-5 border-b border-white/30 pb-3 scrollbar-none">
+              <div className="flex min-w-max">
+                {["buy", "rent", "projects", "commercial", "agents", "developers"].map((tab) => (
+                  <button
+                    key={tab}
+                    onClick={() => setActiveTab(tab)}
+                    className={`capitalize text-sm font-medium whitespace-nowrap px-4 md:px-5 py-2 md:py-2.5 rounded-lg mr-2 transition-all ${
+                      activeTab === tab
+                        ? "bg-primary text-white shadow-lg"
+                        : "text-white hover:bg-white/20"
+                    }`}
+                  >
+                    {tab}
+                  </button>
+                ))}
+              </div>
             </div>
 
             {/* Main Search Form - First Row */}
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-3 mb-4">
-              <div className="md:col-span-6">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-3 mb-3">
+              <div className="col-span-full md:col-span-6">
                 <div className="relative">
                   <div className="absolute left-3 top-1/2 -translate-y-1/2 text-white">
                     <MapPin size={18} />
                   </div>
                   <Input
                     placeholder="City, community or building"
-                    className="h-9 bg-white/20 border-white/40 pl-10 text-white placeholder:text-white focus-visible:bg-white/30 focus-visible:border-white w-full"
+                    className="h-10 bg-white/20 border-white/40 pl-10 text-white placeholder:text-white focus-visible:bg-white/30 focus-visible:border-white w-full"
                   />
                 </div>
               </div>
 
-              <div className="md:col-span-3">
+              <div className="col-span-full md:col-span-3">
                 <Select>
-                  <SelectTrigger className="h-12 w-full bg-white/20 border-white/40 text-white focus:bg-white/30 data-[placeholder]:text-white [&_svg:not([class*='text-'])]:text-white">
+                  <SelectTrigger className="h-10 w-full bg-white/20 border-white/40 text-white focus:bg-white/30 data-[placeholder]:text-white [&_svg:not([class*='text-'])]:text-white">
                     <div className="flex items-center gap-2">
                       <Building size={18} className="text-white" />
                       <SelectValue placeholder="Property type" />
@@ -168,9 +170,9 @@ export function Hero() {
                 </Select>
               </div>
 
-              <div className="md:col-span-3">
+              <div className="col-span-full md:col-span-3">
                 <Select>
-                  <SelectTrigger className="h-12 w-full bg-white/20 border-white/40 text-white focus:bg-white/30 data-[placeholder]:text-white [&_svg:not([class*='text-'])]:text-white">
+                  <SelectTrigger className="h-10 w-full bg-white/20 border-white/40 text-white focus:bg-white/30 data-[placeholder]:text-white [&_svg:not([class*='text-'])]:text-white">
                     <div className="flex items-center gap-2">
                       <Home size={18} className="text-white" />
                       <SelectValue placeholder="Beds & Baths" />
@@ -219,11 +221,11 @@ export function Hero() {
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
                 transition={{ duration: 0.3 }}
-                className="grid grid-cols-1 md:grid-cols-12 gap-3 mb-4"
+                className="grid grid-cols-1 md:grid-cols-12 gap-3 mb-3"
               >
-                <div className="md:col-span-3">
+                <div className="col-span-full md:col-span-3">
                   <Select>
-                    <SelectTrigger className="h-12 w-full bg-white/20 border-white/40 text-white focus:bg-white/30 data-[placeholder]:text-white [&_svg:not([class*='text-'])]:text-white">
+                    <SelectTrigger className="h-10 w-full bg-white/20 border-white/40 text-white focus:bg-white/30 data-[placeholder]:text-white [&_svg:not([class*='text-'])]:text-white">
                       <div className="flex items-center gap-2">
                         <DollarSign size={18} className="text-white" />
                         <SelectValue placeholder="Price Range" />
@@ -270,9 +272,9 @@ export function Hero() {
                   </Select>
                 </div>
                 
-                <div className="md:col-span-3">
+                <div className="col-span-full md:col-span-3">
                   <Select>
-                    <SelectTrigger className="h-12 w-full bg-white/20 border-white/40 text-white focus:bg-white/30 data-[placeholder]:text-white [&_svg:not([class*='text-'])]:text-white">
+                    <SelectTrigger className="h-10 w-full bg-white/20 border-white/40 text-white focus:bg-white/30 data-[placeholder]:text-white [&_svg:not([class*='text-'])]:text-white">
                       <div className="flex items-center gap-2">
                         <ArrowDownUp size={18} className="text-white" />
                         <SelectValue placeholder="Sort By" />
@@ -313,9 +315,9 @@ export function Hero() {
                   </Select>
                 </div>
                 
-                <div className="md:col-span-3">
+                <div className="col-span-full md:col-span-3">
                   <Select>
-                    <SelectTrigger className="h-12 w-full bg-white/20 border-white/40 text-white focus:bg-white/30 data-[placeholder]:text-white [&_svg:not([class*='text-'])]:text-white">
+                    <SelectTrigger className="h-10 w-full bg-white/20 border-white/40 text-white focus:bg-white/30 data-[placeholder]:text-white [&_svg:not([class*='text-'])]:text-white">
                       <div className="flex items-center gap-2">
                         <Filter size={18} className="text-white" />
                         <SelectValue placeholder="Amenities" />
@@ -356,9 +358,9 @@ export function Hero() {
                   </Select>
                 </div>
                 
-                <div className="md:col-span-3">
+                <div className="col-span-full md:col-span-3">
                   <Select>
-                    <SelectTrigger className="h-12 w-full bg-white/20 border-white/40 text-white focus:bg-white/30 data-[placeholder]:text-white [&_svg:not([class*='text-'])]:text-white">
+                    <SelectTrigger className="h-10 w-full bg-white/20 border-white/40 text-white focus:bg-white/30 data-[placeholder]:text-white [&_svg:not([class*='text-'])]:text-white">
                       <div className="flex items-center gap-2">
                         <Home size={18} className="text-white" />
                         <SelectValue placeholder="Property Size" />
@@ -400,12 +402,14 @@ export function Hero() {
                 </div>
               </motion.div>
             )}
-            <div className="flex flex-col items-center gap-3">
+            
+            {/* Search Button and Advanced Filters Toggle */}
+            <div className="flex flex-col items-center gap-3 mt-3">
               <Button
                 size="lg"
-                className="h-10 cursor-pointer bg-primary hover:bg-primary/90 text-white px-10 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all transform hover:scale-105 w-full md:w-auto"
+                className="h-10 md:w-max cursor-pointer bg-primary hover:bg-primary/90 text-white px-10 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all transform hover:scale-105 w-full"
               >
-                <Search size={20} className="mr-2 text-white" />
+                <Search size={18} className="mr-2 text-white" />
                 Search
               </Button>
               
@@ -426,15 +430,15 @@ export function Hero() {
         initial="hidden"
         animate="visible"
         transition={{ delay: 0.6 }}
-        className="absolute bottom-6 left-0 right-0 z-20 flex justify-center gap-2"
+        className="absolute bottom-4 md:bottom-6 left-0 right-0 z-20 flex justify-center gap-2"
       >
         {heroImages.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrentImage(index)}
-            className={`w-2.5 h-2.5 rounded-full transition-all ${
+            className={`w-2 h-2 md:w-2.5 md:h-2.5 rounded-full transition-all ${
               index === currentImage
-                ? "bg-white w-8"
+                ? "bg-white w-6 md:w-8"
                 : "bg-white hover:bg-white/80"
             }`}
             aria-label={`Go to slide ${index + 1}`}
